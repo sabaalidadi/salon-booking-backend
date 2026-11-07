@@ -2,9 +2,11 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module.js';
+import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+   app.use(cookieParser());
   const config = app.get(ConfigService);
 
   app.setGlobalPrefix('api');
@@ -16,7 +18,7 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(Number(config.getOrThrow<number>('PORT')));
+await app.listen(Number(config.getOrThrow<number>('PORT')));
 }
 
 void bootstrap();

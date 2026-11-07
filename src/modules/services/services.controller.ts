@@ -12,8 +12,12 @@ import {
 } from '@nestjs/common';
 import { CreateServiceDto } from './dto/create-service.dto.js';
 import { UpdateServiceDto } from './dto/update-service.dto.js';
-import { DevelopmentOnlyGuard } from './development-only.guard.js';
 import { ServicesService } from './services.service.js';
+import { Roles } from '../auth/decorators/roles.decorator.js';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { RolesGuard } from '../auth/guards/roles.guard.js';
+import { UserRole } from '../users/entities/user.entity.js';
+
 
 @Controller('services')
 export class ServicesController {
@@ -30,13 +34,17 @@ export class ServicesController {
   }
 
   @Post()
-  @UseGuards(DevelopmentOnlyGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(UserRole.ADMIN)
+
   create(@Body() dto: CreateServiceDto) {
     return this.servicesService.create(dto);
   }
 
   @Patch(':id')
-  @UseGuards(DevelopmentOnlyGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(UserRole.ADMIN)
+
   update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() dto: UpdateServiceDto,
@@ -45,7 +53,9 @@ export class ServicesController {
   }
 
   @Delete(':id')
-  @UseGuards(DevelopmentOnlyGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(UserRole.ADMIN)
+
   @HttpCode(204)
   remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.servicesService.remove(id);

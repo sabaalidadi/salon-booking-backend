@@ -6,6 +6,7 @@ import { ServicesModule } from './modules/services/services.module.js';
 import { AuthModule } from './modules/auth/auth.module.js';
 import { SpecialistsModule } from './modules/specialists/specialists.module.js';
 import { AppointmentsModule } from './modules/appointments/appointments.module.js';
+import { ReviewsModule } from './modules/reviews/reviews.module.js';
 
 const Joi = (JoiPackage as any).default || JoiPackage;
 
@@ -43,7 +44,8 @@ const Joi = (JoiPackage as any).default || JoiPackage;
     ServicesModule,
     AuthModule,
     SpecialistsModule,
-    AppointmentsModule
+    AppointmentsModule,
+    ReviewsModule
   ],
 })
 export class AppModule {}

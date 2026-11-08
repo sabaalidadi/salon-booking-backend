@@ -23,10 +23,12 @@ export class SpecialistProfile {
   @Column({ type: 'int', default: 0 })
   yearsExperience: number;
 
-  // در SpecialistProfile (تکمیل روابط):
-@OneToMany(() => SpecialistWorkingHour, (wh) => wh.specialist, { cascade: true })
-workingHours: Relation<SpecialistWorkingHour[]>;
+  // آدرس عکس پروفایل، مثل "/uploads/avatars/xxxx.jpg" (اگر نداشته باشد null)
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  avatarUrl: string | null;
 
+  @OneToMany(() => SpecialistWorkingHour, (wh) => wh.specialist, { cascade: true })
+  workingHours: Relation<SpecialistWorkingHour[]>;
 
   @ManyToMany(() => SalonService)
   @JoinTable({
@@ -35,6 +37,4 @@ workingHours: Relation<SpecialistWorkingHour[]>;
     inverseJoinColumn: { name: 'serviceId', referencedColumnName: 'id' },
   })
   services: SalonService[];
-
-
 }

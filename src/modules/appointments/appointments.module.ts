@@ -9,6 +9,7 @@ import { SpecialistProfile } from '../specialists/entities/specialist-profile.en
 import { SpecialistWorkingHour } from '../specialists/entities/working-hour.entity.js'; // این ایمپورت اضافه شود
 import { AuthModule } from '../auth/auth.module.js';
 
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([

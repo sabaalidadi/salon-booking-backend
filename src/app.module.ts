@@ -7,6 +7,8 @@ import { AuthModule } from './modules/auth/auth.module.js';
 import { SpecialistsModule } from './modules/specialists/specialists.module.js';
 import { AppointmentsModule } from './modules/appointments/appointments.module.js';
 import { ReviewsModule } from './modules/reviews/reviews.module.js';
+import { CategoriesModule } from './modules/categories/categories.module.js';
+import { ChatModule } from './modules/chat/chat.module.js';
 
 const Joi = (JoiPackage as any).default || JoiPackage;
 
@@ -45,7 +47,9 @@ const Joi = (JoiPackage as any).default || JoiPackage;
     AuthModule,
     SpecialistsModule,
     AppointmentsModule,
-    ReviewsModule
+    ReviewsModule,
+    CategoriesModule,
+    ChatModule
   ],
 })
 export class AppModule {}

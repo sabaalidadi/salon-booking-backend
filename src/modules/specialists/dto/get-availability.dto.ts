@@ -13,3 +13,4 @@ export class GetAvailabilityDto {
   @IsUUID('4', { message: 'serviceId باید یک UUID معتبر باشد' })
   serviceId: string;
 }
+

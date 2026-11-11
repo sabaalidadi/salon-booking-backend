@@ -85,6 +85,37 @@ export class ReviewsService {
     };
   }
 
+  // لیست نظرهای همه‌ی متخصص‌های فعال (عمومی)
+  async findAll(query: ListReviewsQueryDto) {
+    const [reviews, totalReviews] = await this.reviewRepo.findAndCount({
+      where: {
+        specialist: { user: { role: UserRole.SPECIALIST, isActive: true } },
+      },
+      relations: { customer: true, specialist: { user: true } },
+      order: { createdAt: 'DESC' },
+      skip: (query.page - 1) * query.limit,
+      take: query.limit,
+    });
+
+    return {
+      page: query.page,
+      limit: query.limit,
+      totalReviews,
+      totalPages: Math.ceil(totalReviews / query.limit),
+      reviews: reviews.map((review) => ({
+        id: review.id,
+        rating: review.rating,
+        comment: review.comment,
+        createdAt: review.createdAt,
+        customer: { fullName: review.customer.fullName },
+        specialist: {
+          id: review.specialistId,
+          fullName: review.specialist.user.fullName,
+        },
+      })),
+    };
+  }
+
   // لیست نظرهای یک متخصص + میانگین و تعداد کل
   async findBySpecialist(specialistId: string, query: ListReviewsQueryDto) {
     const specialist = await this.specialistRepo.findOne({

@@ -27,6 +27,12 @@ export class SalonService {
   @Column({ name: 'price_amount', type: 'integer' })
   priceAmount!: number;
 
+  @Column({ name: 'category_id', type: 'uuid', nullable: true })
+  categoryId!: string | null;
+
+  @Column({ name: 'image_url', type: 'varchar', length: 255, nullable: true })
+  imageUrl!: string | null;
+
   @Column({ name: 'is_active', type: 'boolean', default: true })
   isActive!: boolean;
 

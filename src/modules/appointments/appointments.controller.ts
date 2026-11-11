@@ -24,7 +24,6 @@ import { RescheduleAppointmentDto } from './dto/reschedule-appointment.dto.js';
 export class AppointmentsController {
   constructor(private readonly appointmentsService: AppointmentsService) {}
 
-
   @Post()
   @Roles(UserRole.CUSTOMER)
   create(

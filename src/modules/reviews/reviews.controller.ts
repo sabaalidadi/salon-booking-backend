@@ -34,6 +34,12 @@ export class ReviewsController {
     return this.reviewsService.create(user.id, dto);
   }
 
+  // لیست نظرهای همه‌ی متخصص‌ها (عمومی)
+  @Get('reviews')
+  findAll(@Query() query: ListReviewsQueryDto) {
+    return this.reviewsService.findAll(query);
+  }
+
   // لیست نظرهای یک متخصص (عمومی)
   @Get('specialists/:id/reviews')
   findBySpecialist(

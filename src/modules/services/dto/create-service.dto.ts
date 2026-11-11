@@ -1,6 +1,7 @@
 import {
   IsBoolean,
   IsInt,
+  IsUUID,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -11,6 +12,10 @@ import {
 } from 'class-validator';
 
 export class CreateServiceDto {
+  @IsOptional()
+  @IsUUID()
+  categoryId?: string | null;
+
   @IsString()
   @IsNotEmpty()
   @Matches(/\S/, { message: 'عنوان نباید فقط شامل فاصله باشد' })
